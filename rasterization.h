@@ -173,7 +173,7 @@ std::vector<Pixel> scanline(const Tri& P){
 		float CxA = intersecta(C,A,p.y);
 
 		int xmin =  ceil(fmin(AxB, fmin(BxC, CxA)));
-		int xmax = floor(fmax(ABx, fmax(BxC, CxA)));
+		int xmax = floor(fmax(AxB, fmax(BxC, CxA)));
 		
 		for(p.x = xmin; p.x <= xmax; p.x++){
 			out.push_back(p);

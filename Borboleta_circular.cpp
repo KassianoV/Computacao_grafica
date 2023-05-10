@@ -36,7 +36,6 @@ int main(){
      Elements<Triangles> L{indices};
        // TriLines<Elements<Triangles>> A{indices};   ////2 opção - Usando trilines para marcar a triangulação
        
-
         auto cor = lerp(l, red, yellow);
        // auto cor2 = lerp(l, purple, green); //2 opção - cores para a marcação da triangulação
         G.draw((T*R*Ti)*P, L, cor);

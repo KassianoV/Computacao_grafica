@@ -30,7 +30,7 @@ Aula 25 - </br>
 
 ## Trabalhos Práticos
 Semana 2 - Fazer a Função <font color = "green">tri_area</font> e <font color = "green">barycentric_coords</font> <br/>
-Semana 3 - <br/>
-Semana 4 - <br/>
+Semana 3 - <br/> 
+Semana 4 - Função <font color = "green">LineStripe</font>, <font color = "green">LineLoop</font>, <font color = "green">TriangleStrip</font> e <font color = "green">TriangleFan</font> - Da biblioteca Primitives.h <br/> 
 Semana 5 - <br/>
 ## Trabalhos Teoricos

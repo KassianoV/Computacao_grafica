@@ -1,17 +1,18 @@
 #ifndef PRIMITIVES_H
 #define PRIMITIVES_H
 
-#include <cstddef>
+#include <iostream>
 #include <array>
 #include <vector>
 
-template<class Prims, class Cont>
-auto assemble(const Prims& P, const Cont& V)
+using namespace std;
+template<class Prims, class Vertex>
+auto assemble(const Prims& P, const std::vector<Vertex>& V)
 {
-	using Primitive = decltype(P.assemble(0, std::data(V)));
+	using Primitive = decltype(P.assemble(0, V));
 	std::vector<Primitive> res(P.size());
 	for(unsigned int i = 0; i < P.size(); i++)
-		res[i] = P.assemble(i, std::data(V));
+		res[i] = P.assemble(i, V);
 	return res;
 }
 
@@ -27,7 +28,7 @@ class Lines{
 	size_t size() const{ return n; }
 
 	template<typename Vertex>
-	Line<Vertex> assemble(unsigned int i, const Vertex* V) const{
+	Line<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
 		return { V[2*i], V[2*i+1] };
 	}
 };
@@ -35,45 +36,45 @@ class Lines{
 class LineStrip{
 	/*****************************/
 	/* TAREFA: AULA 06 */
+	/*****************************/
 	size_t n;
 	public:
 	LineStrip(size_t n_verts){
-		if(n_verts==0 ){
+		if(n_verts==0){
 			n=0;
-		}else {
-			n=n_verts-1;
+		}else{
+			n = n_verts-1;
 		}
+		
 	}
+
 	size_t size() const{ return n; }
-	
+
 	template<typename Vertex>
-	Line<Vertex> assemble(unsigned int i, const Vertex* V) const{
-		return { V[i*1], V[1*(i+1)] }; 
-		// faz o tracejado da linha 0 com a linha 1 e da linha 1 com a linha 2[0-0 1] [1-1 2]...
+	Line<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
+		return {V[1*i], V[1*(i+1)] }; // [0 - 0 1]  [ 1 - 1 2]...
 	}
-	
-	/*****************************/
 };
 
 class LineLoop{
 	/*****************************/
 	/* TAREFA: AULA 06 */
+	/*****************************/
 	size_t n;
 	public:
-	LineLoop(size_t n_verts){ n = n_verts; }
+	LineLoop(size_t n_verts){n = n_verts;}
 
-	size_t size() const{ return n; }
+	size_t size() const{ return n; } 
 
 	template<typename Vertex>
-	Line<Vertex> assemble(unsigned int i, const Vertex* V) const{
-		if(i<[n-1]){
-			return { V[i*1], V[1*(i+1)] };
-		}else {
-			return{V[1*i],V[0]};
+	Line<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
+		if (i<(n-1)){ 
+			return{ V[1*i], V[1*(i+1)]};
+		}else{
+			return{V[1*i], V[0]};
 		}
-		// faz o tracejado da linha 0 com a linha 1 e da linha 1 com a linha 2[0-0 1] [1-1 2]... do diferente desse que ele retorna pro 0
+		// {0- 0 1} { 1 - 1 2} {2 - 2 3} {3 - 3 4 } [4 - 4 5] [5- 5 0] 
 	}
-	/*****************************/
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -88,65 +89,66 @@ class Triangles{
 	size_t size() const{ return n; }
 
 	template<typename Vertex>
-	Triangle<Vertex> assemble(unsigned int i, const Vertex* V) const{
-		return { V[3*i], V[3*i + 1], V[3*i + 2] };
+	Triangle<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
+		return { V[3*i], V[3*i + 1], V[3*i + 2] }; // [0 - 0 1 2] [1 - 3 4 5 ] //[2 - 6 7 8]
 	}
 };
 
 class TriangleStrip{
 	/*****************************/
 	/* TAREFA: AULA 06 */
+	/*****************************/
 	size_t n;
 	public:
-	TriangleStrip(size_t s){ 
-		if(s<2){
-			n=0;
-		}else{
-			n=s-2;
-		}
+	TriangleStrip(size_t s){
+		 if(s<2){
+			n = 0;
+		 }else{
+			n = s-2;
+		 }
+		 
 	}
 
 	size_t size() const{ return n; }
 
 	template<typename Vertex>
-	Triangle<Vertex> assemble(unsigned int i, const Vertex* V) const{
-		return { V[1*i], V[1*i + 1], V[1*i + 2] };
+	Triangle<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
+		return { V[1*i], V[1*i + 1], V[1*i + 2] }; //  [0 - 0 1 2] [ 1- 1 2 3] [2- 2 3 4] [3- 3 4 5]
 	}
-	/*****************************/
 };
 
 class TriangleFan{
 	/*****************************/
 	/* TAREFA: AULA 06 */
+	/*****************************/
 	size_t n;
 	public:
 	TriangleFan(size_t s){ 
 		if(s<2){
-			n=0;
+			n = 0;
 		}else{
-			n=s-2;
+			n = s-2;
 		}
+		
 	}
 
 	size_t size() const{ return n; }
 
 	template<typename Vertex>
-	Triangle<Vertex> assemble(unsigned int i, const Vertex* V) const{
-		return { V[0], V[1*i + 1], V[1*i + 2] };
+	Triangle<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
+		
+		return { V[0], V[1*i+1], V[1*i+2], }; //  [0 - 0 1 2 ] [1- 0 2 3 ] [2 - 0 3 4 ] [3 - 0 4 5  ]
+		
+		
 	}
-	/*****************************/
 };
 
 class TrianglesRange{
 	unsigned int first;
 	unsigned int n;
-	public:
-	TrianglesRange(unsigned int first, unsigned int s): first{first}, n{s/3}{}
-
-	size_t size() const{ return n; }
 
 	template<typename Vertex>
-	Triangle<Vertex> assemble(unsigned int i, const Vertex* V) const{
+	Triangle<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
 		return { V[first + 3*i], V[first + 3*i + 1], V[first + 3*i + 2] };
 	}
 };
@@ -154,29 +156,29 @@ class TrianglesRange{
 ///////////////////////////////////////////////////////////////////////
 template<class Primitives>
 class Elements{
-	const unsigned int* indices;
+	std::vector<unsigned int> indices;
 	Primitives P;
 	
 	public:
-	template<class Indices>
-	Elements(const Indices& in): indices{std::data(in)}, P{std::size(in)}{}
+	Elements(const std::vector<unsigned int>& in): indices{in}, P{in.size()}{}
 
 	size_t size() const{ return P.size(); }
 
 	template<typename Vertex>
-	auto assemble(unsigned int i, const Vertex* V) const{
+	auto assemble(unsigned int i, const std::vector<Vertex>& V) const{
 		return assemble(P.assemble(i, indices), V);
 	}
 	
 	template<typename Vertex>
-	Line<Vertex> assemble(Line<unsigned int> indices, const Vertex* V) const{
+	Line<Vertex> assemble(Line<unsigned int> indices, const std::vector<Vertex>& V) const{
 		return { V[indices[0]], V[indices[1]] };
 	}
 	
 	template<typename Vertex>
-	Triangle<Vertex> assemble(Triangle<unsigned int> indices, const Vertex* V) const{
+	Triangle<Vertex> assemble(Triangle<unsigned int> indices, const std::vector<Vertex>& V) const{
 		return { V[indices[0]], V[indices[1]], V[indices[2]] };
 	}
+
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -191,7 +193,7 @@ class TriLines{
 	size_t size() const{ return 3*P.size(); }
 
 	template<typename Vertex>
-	Line<Vertex> assemble(unsigned int i, const Vertex* V) const{
+	Line<Vertex> assemble(unsigned int i, const std::vector<Vertex>& V) const{
 		unsigned j = i/3;
 		unsigned k = i%3;
 

@@ -31,6 +31,7 @@ struct ClipRectangle{
 template<class Vertex>
 bool clip(Line<Vertex>& line, ClipRectangle rect){
 	/**************** TAREFA - AULA 09 **************/
+	
 	return true;
 }
 

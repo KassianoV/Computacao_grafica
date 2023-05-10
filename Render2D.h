@@ -40,6 +40,7 @@ struct Render2dPipeline{
         // calcule as coordenadas baricêntricas
         // use essas coordenadas para interpolar as cores
         // pinte o pixel com a cor interpolada
+		
 	}
 };
 

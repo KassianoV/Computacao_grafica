@@ -31,8 +31,61 @@ struct ClipRectangle{
 template<class Vertex>
 bool clip(Line<Vertex>& line, ClipRectangle rect){
 	/**************** TAREFA - AULA 09 **************/
+	Semiplane P1;
+	P1.A = {rect.x0, rect.y0};
+	P1.n = {1, 0};                          
+	Semiplane P2;
+	P2.A = {rect.x1, rect.y0};
+	P2.n = {-1, 0};
+	Semiplane P3;
+	P3.A = {rect.x1, rect.y1};
+	P3.n = {0, -1};      
+	Semiplane P4;
+	P4.A = {rect.x0, rect.y0};
+	P4.n = {0, 1};
+	Semiplane semiplanes[4] = {P1, P2, P3, P4}; 
+
+	vec2 A = line[0].position;
+	vec2 B = line[1].position;
+	RGB corA = line[0].color;
+	RGB corB = line[1].color;
+
+	float maxIn = 0.0;
+	float minOut = 1.0;
+
+	for(Semiplane s: semiplanes){
+		if(!s.has(A) && !s.has(B)) {
+			return false;
+		}
+		
+		if(s.has(A) && s.has(B)) {
+			continue;
+		}
+
+		float t = s.intersect(A, B);
+
+		if(s.has(A) && !s.has(B)){
+			minOut = std::min(minOut, t);
+		}
+
+		if(!s.has(A) && s.has(B)) {
+			maxIn = std::max(maxIn, t);
+		}
+
+		if(maxIn > minOut) {
+			return false;
+		}
+		
+	}
 	
+	line[0].position = ((1-maxIn)*A) + (maxIn*B);
+	line[1].position = ((1-minOut)*A) + (minOut*B);
+
+	line[0].color = lerp(maxIn, corA, corB);
+	line[1].color = lerp(minOut,corA, corB);
+
 	return true;
+
 }
 
 template<class Vertex>

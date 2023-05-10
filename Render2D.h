@@ -35,6 +35,23 @@ struct Render2dPipeline{
 	}
 
 	void draw(Triangle<Vec2Col> tri){
+		Vec2Col a= tri[0];
+		Vec2Col b= tri[1];
+		Vec2Col c= tri[2];
+		
+		Triangle<vec2> cord ={a.position,b.position,c.position};
+		
+		for(Pixel p: rasterizeTriangle(cord)){
+			float x,y;
+			x = toFloat(p.x);
+			y = toFloat(p.y);
+			vec2 pPostion = {x,y};
+			vec3 T = barycentric_coords(pPostion,cord);
+			RGB color0 = lerp(T[0], a.color, b.color);
+			RGB color1 = lerp(T[2], a.color,c.color);
+			RGB color2 = lerp(T[1],color0,color1);
+			paint(p,color2);
+		}
         // TAREFA - AULA 09
         // Para cada pixel da rasterização
         // calcule as coordenadas baricêntricas

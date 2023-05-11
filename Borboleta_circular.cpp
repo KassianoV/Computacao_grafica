@@ -10,7 +10,8 @@ int main(){
     std::vector<unsigned int> indices = triangulate_polygon(P); // Triangulação para preenchimento de cor
 
     vec2 v = {400,300};
-    ImageRGB G(800, 600);
+    ImageRGB imG(800, 600);
+
     mat3 T = {
 		1.0, 0.0, v[0],
 		0.0, 1.0, v[1],
@@ -22,6 +23,7 @@ int main(){
 		0.0, 1.0, -v[1],
 		0.0, 0.0, 1.0
 	};
+    LineStrip L{P.size()};
 
     for(int t=0;t<12;t++){
         float r = 2*3.14/12*(t+1);
@@ -31,12 +33,9 @@ int main(){
 		    0.0,     0.0,    1.0
 	    };
 
-        LineStrip L{P.size()};
-        
-        
-        G.fill(white);
-        render2d(P, L, red, G);
-        render2d((T*R*Ti)*P, L, blue, G);
+        imG.fill(white);
+        render2d(P, L, red, imG);
+        render2d((T*R*Ti)*P, L, yellow, imG);
     }
-    G.savePNG("Borboleta_circular.png");
+    imG.savePNG("Borboleta_circular.png");
 }

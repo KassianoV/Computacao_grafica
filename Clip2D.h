@@ -2,6 +2,7 @@
 #define CLIP2D_H
 
 #include "Primitives.h"
+#include "VertexUtils.h"
 
 struct Semiplane{
 	vec2 A;

@@ -120,13 +120,34 @@ inline mat4 frustum(float l, float r, float b, float t, float n, float f){
 
 inline mat4 perspective(float fovy, float aspect, float Near, float Far){
 	/* TAREFA - AULA 12 */
-	return {
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1
-	};
-}
+	
+	float fovyEmRadiano = (fovy*M_PI)/180; //transformando angulo em radianos
+	/*Slide 64,65*/
+	float t = Near*tan(fovyEmRadiano/2);
+	float b = -t;
+	float r = t * aspect;
+	float l = -r;
 
+	//slide 52
+	mat4 persp = {
+		1,  0,  0,                0,
+		0,  1,  0,                0,
+		0,  0,  (Near+Far)/Near, -Far,
+		0,  0,  1/Near,           0
+	};
+
+	mat4 projection = persp*scale(1,1,-1);
+
+	//volume : slide 55
+	mat4 Volume = {
+		2/(r-l),  0,       0,      (l+r)/(l-r),
+		0,        2/(t-b), 0,      (b+t)/(b-t),
+		0,        0, 2/(Far-Near), (Near+Far)/(Near-Far),
+		0,        0,       0,       1
+	};	
+
+	return Volume*projection;
+	
+}
 
 #endif

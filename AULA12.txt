@@ -1,0 +1,17 @@
+ M = {
+        1 0 0 0
+        0 1 0 0
+        0 0 (n+f)/n -f
+        0 0 1/n 0
+    }
+
+Passo 1 - P = (x,y,z,1) // Considere um ponto P no espaço tridimensional com coordenadas (x, y, z, 1).
+         
+Passo 2 - P' = M*P
+
+Passo 3 - P' =  [[1 0 0 0]              [x]
+                [0 1 0 0]           *   [y]
+                [0 0 (n+f)/n -f]        [n]
+                [0 0 1/n 0]]            [1]
+
+Passo 4 - P' = [x, y, (n+f)/n * n - f, n/ n] = [x, y, n + f - f, 1] = [x, y, n, 1]

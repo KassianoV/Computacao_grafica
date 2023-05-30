@@ -69,34 +69,26 @@ template<class Varying>
 std::vector<Varying> clip(const std::vector<Varying>& polygon, vec4 n){
 	std::vector<Varying> R;
 	
-
 	/* TAREFA - AULA 14 */
-	for( Varying p: polygon){
-		vec4 A = getposition(p[0]); //substituir por <Varying> 
-		vec4 B = getposition(p[1]);
-		float an =dot(A,n),bn=dot(B,n);
-		bool Ain =(an>=0),Bin=(bn>0);
-		if(!Ain && !Bin){//tudo dentro
+	for(int i = 0; i < polygon.size(); i++) {		
+		Varying A = polygon[i];
+		Varying B = polygon[(i+1)%polygon.size()];
 
-		}
-		if(Ain && Bin)//tudo fora
-		{
-
-		}
-		if(){//A dentro
-
-		}if(){//B dentro
+		float nA = dot(getPosition(A), n);
+		float nB = dot(getPosition(B), n);
 		
+		bool Ain = nP >= 0;
+		bool Bin = nB >= 0;
+
+		if(Ain != Qin) {
+			float t = nP/(nA-nB);
+			R.push_back((1-t)*A + t*B);
 		}
 
-	}
-	Line<Varying> copy=line;
-	line[0].position = ((1-maxIn)*A) + (maxIn*B);
-	line[1].position = ((1-minOut)*A) + (minOut*B);
-
-	line[0].color = lerp(maxIn, corA, corB);
-	line[1].color = lerp(minOut,corA, corB);	
-	return R;
+		if(Bin) {
+			R.push_back(B);
+		}
+	}	
 }
 
 template<class Varying>

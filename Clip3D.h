@@ -89,6 +89,7 @@ std::vector<Varying> clip(const std::vector<Varying>& polygon, vec4 n){
 			R.push_back(B);
 		}
 	}	
+	return R;
 }
 
 template<class Varying>

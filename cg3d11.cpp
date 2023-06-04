@@ -41,10 +41,10 @@ int main(){
     figure.metaballs = {
 		{1, 1.5, { 0, 0, 0}},
 		{1, 0.7, { 0, 0.1, 1}},
-		{1, 0.5, { 1, 0, 0}},
-		{1, 0.5, {-1, 0, 0}},
-		{1, 0.5, {0.4, 0,-0.9}},
-		{1, 0.5, {-0.4, 0,-0.9}},
+		{1, 1, { 1, 0, 0}},
+		{1, 1, {-1, 0, 0}},
+		{1, 1, {0.4, 0,-0.9}},
+		{1, 1, {-0.4, 0,-0.9}},
     };
 
 	vec3 pmin = {-2, -2, -2}; 
@@ -69,7 +69,7 @@ MixColorShader shader;
 	float a = w/(float)h;
 	mat4 Projection = perspective(45, a, 0.1, 100);
 
-	int nframes = 80;
+	int nframes = 5;
 	for(int k = 0; k < nframes; k++){
 		G.fill(white);
 		ImageZBuffer I{G};

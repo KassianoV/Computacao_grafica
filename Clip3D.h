@@ -77,11 +77,11 @@ std::vector<Varying> clip(const std::vector<Varying>& polygon, vec4 n){
 		float nA = dot(getPosition(A), n);
 		float nB = dot(getPosition(B), n);
 		
-		bool Ain = nP >= 0;
+		bool Ain = nA >= 0;
 		bool Bin = nB >= 0;
 
-		if(Ain != Qin) {
-			float t = nP/(nA-nB);
+		if(Ain != Bin) {
+			float t = nA/(nA-nB);
 			R.push_back((1-t)*A + t*B);
 		}
 

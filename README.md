@@ -34,4 +34,15 @@ Semana 3 - fazer um boneco de micrelin fazer a função <font color="green">scan
 Semana 4 - Função <font color = "green">LineStripe</font>, <font color = "green">LineLoop</font>, <font color = "green">TriangleStrip</font> e <font color = "green">TriangleFan</font> - Da biblioteca Primitives.h <br/> 
 Semana 5 - Fazer um programa que faça a rotação da imagem <font color="green">Borboleta.txt</font> e a função <font color="green"> Clip</font><br/>
 Semana 6 - 
+Semana 7 - 
+Semana 8 - 
 ## Trabalhos Teoricos
+
+## Execução C++
+A seguir, vá ao diretório onde você gravou o seu programa, usando o comando cd.
+
+Supondo que o nome de seu programa seja Teste.cpp, para compilá-lo digite g++ -o teste Teste.cpp.
+
+Caso a compliação tenha sido executada com sucesso voce poderá executar seu programa digitando ./teste
+
+ 

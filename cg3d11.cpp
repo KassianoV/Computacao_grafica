@@ -39,12 +39,12 @@ int main(){
 	MetaballFigure figure;
 	figure.T = 0.5;
     figure.metaballs = {
-		{1, 1.5, { 0, 0, 0}},
-		{1, 0.7, { 0, 0.1, 1}},
-		{1, 0.5, { 1, 0, 0}},
-		{1, 0.5, {-1, 0, 0}},
-		{1, 0.5, {0.4, 0,-0.9}},
-		{1, 0.5, {-0.4, 0,-0.9}},
+		{1, 1.4, { 0, 0, 1}},
+		{1.2, 1.4, { 0, 0.1, 1}},
+		{1.5, 0.8, { 1, 0, 0}},
+		{1.5, 0.8, {-1, 0, 0}},
+		{1.2, 0.7, {0.4, 0,-0.9}},
+		{1, 0.7, {-0.4, 0,-0.9}},
     };
 
 	vec3 pmin = {-2, -2, -2}; 
@@ -56,20 +56,19 @@ MixColorShader shader;
 	shader.pmin = pmin;
 	shader.pmax = pmax;
 	shader.C = {
-		red, blue, green, yellow, 
-		orange, magenta, cyan, purple
+		magenta, yellow, orange
 	};
 
 	Triangles T{P.size()};
 
-	int w = 600, h = 600;
+	int w = 650, h = 650;
 	ImageRGB G{w, h};
 	
-	mat4 View = lookAt({2.5, 2.5, 1.5}, {0, 0, 0}, {0, 0, 1});
+	mat4 View = lookAt({2.5, 2.5, 2.5}, {0, 0, 0}, {0, 0, 1});
 	float a = w/(float)h;
 	mat4 Projection = perspective(45, a, 0.1, 100);
 
-	int nframes = 5;
+	int nframes = 10;
 	for(int k = 0; k < nframes; k++){
 		G.fill(white);
 		ImageZBuffer I{G};

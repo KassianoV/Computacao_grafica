@@ -46,9 +46,9 @@ int main(){
 		"../brickwall.jpg");
 
 	meshes.emplace_back(
-		"modelos/box.obj", 
-		translate(1, 1, -6)*rotate_y(-0.4),
-		"../bob.jpg");
+		"Meu_modelo/Ellie/Ellie.obj", 
+		translate(1, 1, -6)*rotate_y(-0.4)*scale(.001, .001, .001)
+		);
 
 	meshes.emplace_back(
 		"modelos/metroid/DolBarriersuit.obj", 
@@ -81,7 +81,7 @@ int main(){
 	vec3 p0 = {2, 1.7, 10};
 	vec3 p1 = {-1, 2.7, -18};
 
-	int nframes = 60;
+	int nframes = 5;
 	for(int k = 0; k < nframes; k++){
 		G.fill(0x00A5DC_rgb);
 		ImageZBuffer I{G};

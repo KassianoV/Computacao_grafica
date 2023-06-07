@@ -25,7 +25,7 @@ int main(){
 
 	TextureShader shader;
 	shader.texture.img = ImageRGB{"minichecker.png"};
-	shader.texture.filter = BILINEAR;
+	shader.texture.filter = NEAREST;
 	shader.texture.wrapX = CLAMP;
 	shader.texture.wrapY = CLAMP;
 	shader.M = Projection*View*Model;

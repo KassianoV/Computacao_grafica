@@ -121,7 +121,7 @@ inline mat4 frustum(float l, float r, float b, float t, float n, float f){
 inline mat4 perspective(float fovy, float aspect, float Near, float Far){
 	/* TAREFA - AULA 12 */
 	
-	float fovyEmRadiano = (fovy*M_PI)/180; //transformando angulo em radianos
+	float fovyEmRadiano = (fovy*3.141592653589793238462643383279f)/180; //transformando angulo em radianos
 	/*Slide 64,65*/
 	float t = Near*tan(fovyEmRadiano/2);
 	float b = -t;

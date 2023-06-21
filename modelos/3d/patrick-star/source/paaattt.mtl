@@ -1,0 +1,23 @@
+# Blender 3.5.1 MTL File: 'paaattt.blend'
+# www.blender.org
+
+newmtl Material.003
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd paaattt_Material_color.png
+map_Bump -bm 1.000000 paaattt_Material_nmap.png
+
+newmtl Material.004
+Ns 250.000000
+Ka 0.275000 0.275000 0.275000
+Kd 0.925826 0.925826 0.925826
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3

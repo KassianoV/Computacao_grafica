@@ -40,32 +40,25 @@ class Mesh{
 int main(){
 	std::vector<Mesh> meshes;
 
+	
 	meshes.emplace_back(
-		"modelos/floor.obj", 
-		scale(35, 35, 35), 
-		"../brickwall.jpg");
-
-	meshes.emplace_back(
-		"Meu_modelo/Ellie/Ellie.obj", 
-		translate(1, 1, -6)*rotate_y(-0.4)*scale(.001, .001, .001)
+		"modelos/3d/sb-2/source/sb_2.obj", 
+		translate(1, 1, -6)*rotate_y(-0.4)*scale(0.4, 0.4, 0.4)
 		);
 
 	meshes.emplace_back(
-		"modelos/metroid/DolBarriersuit.obj", 
-		translate(-1, 0, -1)*rotate_y(0.2)*scale(.1, .1, .1));
+		"modelos/3d/patrick-star/source/paaattt.obj", 
+		translate(-1,2.5f, -1)*rotate_y(0.2)*scale(.01, .01, .01));
 
 	meshes.emplace_back(
-		"modelos/pose/pose.obj", 
-		translate(1, 0, 0)*scale(0.009, 0.009, 0.009));
+		"modelos/3d/abacaxi/source/abacaxi.obj", 
+		translate(2, 0, 0)*scale(0.1, 0.1, 0.1));
 
 	meshes.emplace_back(
-		"modelos/House Complex/House Complex.obj", 
-		translate(4, 0, 0)*rotate_y(0.5*M_PI)*scale(.15, .15, .15));
+		"modelos/House Complex/House Complex/House Complex.obj", 
+		translate(4, 0, 0)*rotate_y(0.5*3.141592653589793238462643383279f)*scale(.15, .15, .15));
 
-	meshes.emplace_back(
-		"modelos/pony-cartoon/Pony_cartoon.obj", 
-		translate(-2, 0, -3)*scale(0.005, 0.005, 0.005)
-	);
+	
 
 	TextureShader shader;
 	shader.texture.filter = BILINEAR;
